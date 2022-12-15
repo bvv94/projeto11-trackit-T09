@@ -4,12 +4,13 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function SignIn({API}) {
+export default function SignIn() {
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
     const [password, setPassword] = useState("");
+    const [disabled, setDisabled] = useState(false);
     const navigate = useNavigate();
 
     function signin(e) {
@@ -18,18 +19,19 @@ export default function SignIn({API}) {
 
         console.log(email, name, image, password)
         e.preventDefault();
+        setDisabled(true);
         alert ("Cadastrando")
 
-        const promise = axios.post(`${API}/sign-up`, body)
-        console.log (`${API}/sign-up`)
-        console.log (promise)
-        // const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
 
         promise.then((res) => {
             console.log(res)
-            navigate("/")
+            navigate("/")       
         })
-        promise.catch((err) => alert(err.response.statusText))
+        promise.catch((err) => {
+            alert(err.response.statusText)
+            setDisabled(false)
+        })
     }
 
     return (
@@ -55,7 +57,7 @@ export default function SignIn({API}) {
                         <input name="image" type="url" placeholder="foto" required
                             value={image} onChange={e => setImage(e.target.value)} />
                     </div>
-                    <Button type="submit">Cadastrar</Button>
+                    <Button disabled={disabled} type="submit">Cadastrar</Button>
                     <div>
                         <Tosignin to="/">Já tem uma conta? Faça login!</Tosignin>
                     </div>

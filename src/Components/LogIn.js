@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
-export default function Home({ API }) {
+export default function LogIn() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -17,18 +17,18 @@ export default function Home({ API }) {
         const body = { email, password };
 
         e.preventDefault();
-        alert("loging in")
-
         setDisabled(true)
-        console.log(`${disabled} desabilitou se TRUE`)
 
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body)
 
         promise.then((res) => {
-            setDisabled(false)
+            
             navigate('/hoje')
         })
-        promise.catch((err) => alert(err.response.statusText))
+        promise.catch((err) => {
+            setDisabled(false)
+            alert(err.response.statusText)
+        })
 
     }
 
