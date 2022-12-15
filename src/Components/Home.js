@@ -5,12 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
-export default function Home({API}) {
+export default function Home({ API }) {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [disabled, setDisabled] = useState(false);
 
     function login(e) {
 
@@ -19,11 +19,14 @@ export default function Home({API}) {
         e.preventDefault();
         alert("loging in")
 
-        const promise = axios.post(`${API}/login`, body)
+        setDisabled(true)
+        console.log(`${disabled} desabilitou se TRUE`)
+
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body)
 
         promise.then((res) => {
-            console.log(res)
-            navigate('/')
+            setDisabled(false)
+            navigate('/hoje')
         })
         promise.catch((err) => alert(err.response.statusText))
 
@@ -44,7 +47,7 @@ export default function Home({API}) {
                         <input name="senha" type="password" placeholder="senha" required
                             value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
-                    <button type="submit">Entrar</button>
+                    <button disabled={disabled} type="submit">Entrar</button>
                     <div>
                         <Tosignin to="/cadastro">Não tem uma conta? Cadastre-se!</Tosignin>
                     </div>
@@ -86,8 +89,6 @@ const Inputs = styled.div`
         
 
         ::placeholder{
-            font-family: 'lexend deca';
-            font-weight: 400;
             font-size: 20px;
             color: #DBDBDB
         }
@@ -99,14 +100,10 @@ const Inputs = styled.div`
         background-color: #52B6FF;
         color: #FFFFFF;
         border-radius: 5px;
-        font-family: 'lexend deca';
-        font-weight: 400;
         font-size: 21px;
     }
 `
 const Tosignin = styled(Link)`
     margin-top: 46px;
-    font-family: 'lexend deca';
-    font-weight: 400;
     font-size: 14px;
 `

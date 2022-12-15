@@ -13,12 +13,17 @@ export default function SignIn({API}) {
     const navigate = useNavigate();
 
     function signin(e) {
+        
         const body = {email, name, image, password}
 
+        console.log(email, name, image, password)
         e.preventDefault();
         alert ("Cadastrando")
 
-        const promise = axios.post(`${API}sign-up`, body)
+        const promise = axios.post(`${API}/sign-up`, body)
+        console.log (`${API}/sign-up`)
+        console.log (promise)
+        // const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
 
         promise.then((res) => {
             console.log(res)
@@ -50,7 +55,7 @@ export default function SignIn({API}) {
                         <input name="image" type="url" placeholder="foto" required
                             value={image} onChange={e => setImage(e.target.value)} />
                     </div>
-                    <button type="submit">Cadastrar</button>
+                    <Button type="submit">Cadastrar</Button>
                     <div>
                         <Tosignin to="/">Já tem uma conta? Faça login!</Tosignin>
                     </div>
@@ -98,21 +103,18 @@ input{
         color: #DBDBDB
     }
 }
-
-button{
-    height: 45px;
-    width: 303px;
-    background-color: #52B6FF;
-    color: #FFFFFF;
-    border-radius: 5px;
-    font-family: 'lexend deca';
-    font-weight: 400;
-    font-size: 21px;
-}
 `
 const Tosignin = styled(Link)`
 margin-top: 46px;
 font-family: 'lexend deca';
 font-weight: 400;
 font-size: 14px;
+`
+const Button = styled.button`
+    height: 45px;
+    width: 303px;
+    background-color: #52B6FF;
+    color: #FFFFFF;
+    border-radius: 5px;
+    font-size: 21px;
 `

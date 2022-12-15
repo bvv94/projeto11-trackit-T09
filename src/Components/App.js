@@ -5,7 +5,7 @@ import GlobalStyle from "../styles/GlobalStyle"
 
 export default function App() {
 
-  const API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/";
+  const API = "";
 
   return (
     <BrowserRouter>
