@@ -17,9 +17,10 @@ const Div = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 375px;
+    z-index: 1;
 `
 
 const TopBar = styled.div`

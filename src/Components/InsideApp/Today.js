@@ -1,5 +1,4 @@
 import Top from "./Top"
-import Progress from "./Progress"
 import MenuBottom from "./MenuBottom"
 import styled from "styled-components"
 import { useState } from "react"
@@ -20,7 +19,6 @@ export default function Today() {
                     {habit}
                 </Habits>
             </Body>
-            <Progress />
             <MenuBottom />
         </Div>
     )
