@@ -2,8 +2,8 @@ import logo from "../assets/Logo.png"
 import styled from "styled-components"
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import Context from "./Context";
 
 export default function LogIn() {
 
@@ -11,6 +11,7 @@ export default function LogIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [disabled, setDisabled] = useState(false);
+    const [user, setUser] = useContext(Context);
 
     function login(e) {
 
@@ -18,11 +19,14 @@ export default function LogIn() {
 
         e.preventDefault();
         setDisabled(true)
-
+        console.log(user)
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body)
 
         promise.then((res) => {
-            
+            console.log(res)
+            console.log(res.data.name)
+            setUser(res.data.name)
+            console.log(user)
             navigate('/hoje')
         })
         promise.catch((err) => {
@@ -40,11 +44,11 @@ export default function LogIn() {
             <Inputs>
                 <form onSubmit={login}>
                     <div>
-                        <input name="email" type="email" placeholder="email" required
+                        <input disabled={disabled} name="email" type="email" placeholder="email" required
                             value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
                     <div>
-                        <input name="senha" type="password" placeholder="senha" required
+                        <input disabled={disabled} name="senha" type="password" placeholder="senha" required
                             value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
                     <button disabled={disabled} type="submit">Entrar</button>
@@ -100,7 +104,11 @@ const Inputs = styled.div`
         background-color: #52B6FF;
         color: #FFFFFF;
         border-radius: 5px;
+        border: none;        
         font-size: 21px;
+        :hover{
+        cursor: pointer;
+    }
     }
 `
 const Tosignin = styled(Link)`
