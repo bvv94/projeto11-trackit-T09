@@ -11,7 +11,8 @@ export default function LogIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [disabled, setDisabled] = useState(false);
-    const [user, setUser] = useContext(Context);
+    // const [user, setUser] = useContext(Context);
+    const [user, setUser] = useState("");
 
     function login(e) {
 
@@ -44,15 +45,15 @@ export default function LogIn() {
             <Inputs>
                 <form onSubmit={login}>
                     <div>
-                        <input disabled={disabled} name="email" type="email" placeholder="email" required
+                        <input data-test="email-input" disabled={disabled} name="email" type="email" placeholder="email" required
                             value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
                     <div>
-                        <input disabled={disabled} name="senha" type="password" placeholder="senha" required
+                        <input data-test="password-input" disabled={disabled} name="senha" type="password" placeholder="senha" required
                             value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
-                    <button disabled={disabled} type="submit">Entrar</button>
-                    <div>
+                    <button data-test="login-btn" disabled={disabled} type="submit">Entrar</button>
+                    <div data-test="signup-link">
                         <Tosignin to="/cadastro">Não tem uma conta? Cadastre-se!</Tosignin>
                     </div>
                 </form>
@@ -106,9 +107,6 @@ const Inputs = styled.div`
         border-radius: 5px;
         border: none;        
         font-size: 21px;
-        :hover{
-        cursor: pointer;
-    }
     }
 `
 const Tosignin = styled(Link)`

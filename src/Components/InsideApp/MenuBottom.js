@@ -5,29 +5,31 @@ import 'react-circular-progressbar/dist/styles.css';
 
 export default function MenuBottom() {
 
-    const percentage = 30;
+    const percentage = 50;
 
     return (
-        <>
-            <Circle>
-                <CircularProgressbar value={percentage} text={`${percentage}%`}
-                    background
-                    backgroundPadding={6}
-                    styles={buildStyles({
-                        backgroundColor: "#3e98c7",
-                        textColor: "#fff",
-                        pathColor: "#fff",
-                        trailColor: "transparent"
-                    })}
-                />
-            </Circle>
+        <div data-test="menu">
+            <div data-test="today-link">
+                <Circle>
+                    <CircularProgressbar value={percentage} text={`Hoje`}
+                        background
+                        backgroundPadding={6}
+                        styles={buildStyles({
+                            backgroundColor: "#3e98c7",
+                            textColor: "#fff",
+                            pathColor: "#fff",
+                            trailColor: "transparent"
+                        })}
+                    />
+                </Circle>
+            </div>
             <Div>
-                <div>
+                <div data-test="habit-link history-link">
                     <StyledLink to="/habitos">Hábitos</StyledLink>
                     <StyledLink to="/historico">Histórico</StyledLink>
                 </div>
             </Div>
-        </>
+        </div>
     )
 }
 

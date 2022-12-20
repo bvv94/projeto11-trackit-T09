@@ -11,7 +11,7 @@ export default function App() {
   const [user, setUser] = useState("")
 
   return (
-    <Context.Provider value={[user, setUser]}>
+    <Context.Provider value={{user, setUser, URL}}>
       <BrowserRouter>
         <GlobalStyle />
         <Routes>

@@ -4,7 +4,7 @@ export default function Top() {
     return (
         <Div>
             <TopBar>
-                <div>
+                <div data-test="header"h>
                     <p>TrackIt</p>
                     <img scr="https://www.shutterstock.com/image-vector/vector-line-icon-img-260nw-2050481222.jpg" alt="img perfil"></img>
                 </div>

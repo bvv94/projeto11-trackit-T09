@@ -14,19 +14,19 @@ export default function SignIn() {
     const navigate = useNavigate();
 
     function signin(e) {
-        
-        const body = {email, name, image, password}
+
+        const body = { email, name, image, password }
 
         console.log(email, name, image, password)
         e.preventDefault();
         setDisabled(true);
-        alert ("Cadastrando")
+        alert("Cadastrando")
 
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
 
         promise.then((res) => {
             console.log(res)
-            navigate("/")       
+            navigate("/")
         })
         promise.catch((err) => {
             alert(err.response.statusText)
@@ -42,23 +42,25 @@ export default function SignIn() {
             <Inputs>
                 <form onSubmit={signin}>
                     <div>
-                        <input name="email" type="email" placeholder="email" required
+                        <input data-test="email-input" vname="email" type="email" placeholder="email" required
                             value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
                     <div>
-                        <input name="password" type="password" placeholder="senha" required
+                        <input data-test="password-input" name="password" type="password" placeholder="senha" required
                             value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
                     <div>
-                        <input name="name" type="text" placeholder="nome" required
+                        <input data-test="user-name-input" name="name" type="text" placeholder="nome" required
                             value={name} onChange={e => setName(e.target.value)} />
                     </div>
                     <div>
-                        <input name="image" type="url" placeholder="foto" required
+                        <input data-test="user-image-input" name="image" type="url" placeholder="foto" required
                             value={image} onChange={e => setImage(e.target.value)} />
                     </div>
-                    <Button disabled={disabled} type="submit">Cadastrar</Button>
-                    <div>
+                    <div data-test="signup-btn">
+                        <Button disabled={disabled} type="submit">Cadastrar</Button>
+                    </div>
+                    <div data-test="login-link">
                         <Tosignin to="/">Já tem uma conta? Faça login!</Tosignin>
                     </div>
                 </form>
